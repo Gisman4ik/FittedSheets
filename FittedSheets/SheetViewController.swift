@@ -12,6 +12,8 @@ import UIKit
 open class SheetViewController: UIViewController {
     public private(set) var options: SheetOptions
     
+    public static var animationSped: TimeInterval = 0.5
+
     /// Default value for autoAdjustToKeyboard. Defaults to true.
     public static var autoAdjustToKeyboard = true
     /// Automatically grow/move the sheet to accomidate the keyboard. Defaults to false.
@@ -537,7 +539,7 @@ open class SheetViewController: UIViewController {
     }
     
     public func resize(to size: SheetSize,
-                       duration: TimeInterval = 0.2,
+                       duration: TimeInterval = animationSped,
                        options: UIView.AnimationOptions = [.curveEaseOut],
                        animated: Bool = true,
                        complete: (() -> Void)? = nil) {
