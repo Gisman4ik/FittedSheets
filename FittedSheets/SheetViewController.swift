@@ -9,7 +9,7 @@
 #if os(iOS) || os(tvOS) || os(watchOS)
 import UIKit
 
-public class SheetViewController: UIViewController {
+open class SheetViewController: UIViewController {
     public private(set) var options: SheetOptions
     
     /// Default value for autoAdjustToKeyboard. Defaults to true.
