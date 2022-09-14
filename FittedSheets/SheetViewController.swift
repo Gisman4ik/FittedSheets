@@ -382,7 +382,7 @@ open class SheetViewController: UIViewController {
         
         switch gesture.state {
             case .cancelled, .failed:
-                UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseOut], animations: {
+                UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseOut], animations: {
                     self.contentViewController.view.transform = CGAffineTransform.identity
                     self.contentViewHeightConstraint.constant = self.height(for: self.currentSize)
                     self.transition.setPresentor(percentComplete: 0)
@@ -410,7 +410,7 @@ open class SheetViewController: UIViewController {
                     finalHeight = -1
                 }
                 
-                let animationDuration = TimeInterval(abs(velocity*0.0002) + 0.2)
+                let animationDuration = 1
                 
                 guard finalHeight > 0 || !self.dismissOnPull else {
                     // Dismiss
