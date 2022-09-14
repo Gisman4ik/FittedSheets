@@ -410,7 +410,7 @@ open class SheetViewController: UIViewController {
                     finalHeight = -1
                 }
                 
-                let animationDuration = 1
+                let animationDuration = 1.0
                 
                 guard finalHeight > 0 || !self.dismissOnPull else {
                     // Dismiss
