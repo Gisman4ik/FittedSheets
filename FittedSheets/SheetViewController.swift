@@ -395,6 +395,8 @@ open class SheetViewController: UIViewController {
             case .began, .changed:
                 self.contentViewHeightConstraint.constant = newHeight
                 
+                if offset > 50 { self.view.endEditing(true) }
+                
                 if offset > 0 {
                     let percent = max(0, min(1, offset / max(1, newHeight)))
                     self.transition.setPresentor(percentComplete: percent)
@@ -578,6 +580,7 @@ open class SheetViewController: UIViewController {
     }
     
     public func attemptDismiss(animated: Bool) {
+        self.view.endEditing(true)
         if self.shouldDismiss?(self) != false {
             if self.options.useInlineMode {
                 if animated {
