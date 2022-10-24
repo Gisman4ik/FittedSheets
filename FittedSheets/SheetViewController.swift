@@ -12,7 +12,8 @@ import UIKit
 open class SheetViewController: UIViewController {
     public private(set) var options: SheetOptions
     
-    public static var animationSpeed: TimeInterval = 1
+    public static var resizeAnimationSpeed: TimeInterval = 0
+    public static var defaultAnimateInSpeed: TimeInterval = 0.5
 
     /// Default value for autoAdjustToKeyboard. Defaults to true.
     public static var autoAdjustToKeyboard = true
@@ -539,7 +540,7 @@ open class SheetViewController: UIViewController {
     }
     
     public func resize(to size: SheetSize,
-                       duration: TimeInterval = animationSpeed,
+                       duration: TimeInterval = resizeAnimationSpeed,
                        options: UIView.AnimationOptions = [.curveEaseOut],
                        animated: Bool = true,
                        complete: (() -> Void)? = nil) {
@@ -602,7 +603,7 @@ open class SheetViewController: UIViewController {
     }
     
     /// Animates the sheet in, but only if presenting using the inline mode
-    public func animateIn(to view: UIView, in parent: UIViewController, size: SheetSize? = nil, duration: TimeInterval = 1, completion: (() -> Void)? = nil) {
+    public func animateIn(to view: UIView, in parent: UIViewController, size: SheetSize? = nil, duration: TimeInterval = defaultAnimateInSpeed, completion: (() -> Void)? = nil) {
         
         self.willMove(toParent: parent)
         parent.addChild(self)
@@ -619,7 +620,7 @@ open class SheetViewController: UIViewController {
         self.animateIn(size: size, duration: duration, completion: completion)
     }
     
-    public func animateIn(size: SheetSize? = nil, duration: TimeInterval = 1, completion: (() -> Void)? = nil) {
+    public func animateIn(size: SheetSize? = nil, duration: TimeInterval = defaultAnimateInSpeed, completion: (() -> Void)? = nil) {
         guard self.options.useInlineMode else { return }
         guard self.view.superview != nil else {
             print("It appears your sheet is not set as a subview of another view. Make sure to add this view as a subview before trying to animate it in.")
