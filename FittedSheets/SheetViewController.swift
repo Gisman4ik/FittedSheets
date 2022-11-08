@@ -152,6 +152,7 @@ open class SheetViewController: UIViewController {
     /// The child view controller's scroll view we are watching so we can override the pull down/up to work on the sheet when needed
     private weak var childScrollView: UIScrollView?
     
+    private var isDismissingNow: Bool = false
     private var keyboardHeight: CGFloat = 0
     private var firstPanPoint: CGPoint = CGPoint.zero
     private var panOffset: CGFloat = 0
@@ -354,6 +355,7 @@ open class SheetViewController: UIViewController {
     }
     
     @objc func panned(_ gesture: UIPanGestureRecognizer) {
+        guard !isDismissingNow else { return }
         let point = gesture.translation(in: gesture.view?.superview)
         if gesture.state == .began {
             self.firstPanPoint = point
@@ -584,18 +586,23 @@ open class SheetViewController: UIViewController {
     public func attemptDismiss(animated: Bool) {
         self.view.endEditing(true)
         if self.shouldDismiss?(self) != false {
+            self.isDismissingNow = true
             if self.options.useInlineMode {
                 if animated {
                     self.animateOut {
+                        self.isDismissingNow = false
                         self.didDismiss?(self)
                     }
                 } else {
                     self.view.removeFromSuperview()
                     self.removeFromParent()
+                    self.isDismissingNow = false
                     self.didDismiss?(self)
                 }
             } else {
-                self.dismiss(animated: animated, completion: nil)
+                self.dismiss(animated: animated) { [weak self] in
+                    self?.isDismissingNow = false
+                }
             }
         }
     }
