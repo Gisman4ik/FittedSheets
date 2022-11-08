@@ -420,6 +420,7 @@ open class SheetViewController: UIViewController {
                 guard finalHeight > 0 || !self.dismissOnPull else {
                     // Dismiss
                     if self.shouldDismiss?(self) != false {
+                        self.isDismissingNow = true
                         UIView.animate(
                             withDuration: animationDuration,
                             delay: 0,
