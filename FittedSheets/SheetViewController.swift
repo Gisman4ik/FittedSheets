@@ -588,6 +588,7 @@ open class SheetViewController: UIViewController {
         self.view.endEditing(true)
         if self.shouldDismiss?(self) != false {
             self.isDismissingNow = true
+            self.view.isUserInteractionEnabled = false
             if self.options.useInlineMode {
                 if animated {
                     self.animateOut {
