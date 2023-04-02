@@ -152,7 +152,7 @@ open class SheetViewController: UIViewController {
     /// The child view controller's scroll view we are watching so we can override the pull down/up to work on the sheet when needed
     private weak var childScrollView: UIScrollView?
     
-    private var isDismissingNow: Bool = false
+    public var isDismissingNow: Bool = false
     private var keyboardHeight: CGFloat = 0
     private var firstPanPoint: CGPoint = CGPoint.zero
     private var panOffset: CGFloat = 0
